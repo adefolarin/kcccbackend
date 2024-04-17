@@ -1,0 +1,19 @@
+   #div_img {
+      width: 150px;
+      margin: auto;
+   }
+
+   #div_img > img {
+     width: 100%;
+     border-radius: 0px;
+   }
+
+   #div_video {
+     width: 200px;
+     margin: auto;
+   }
+
+  .embed-responsive-item {
+     width: 200px;
+     height: 200px;
+   }
