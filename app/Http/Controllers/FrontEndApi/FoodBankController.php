@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class FoodBankController extends Controller
 {
@@ -35,8 +36,8 @@ class FoodBankController extends Controller
                 $data [] = array(
                 'foodbanks_id' => $foodbanks->foodbanks_id,
                 'foodbanks_name' => $foodbanks->foodbanks_name,
-                'foodbanks_videofile' => $foodbanks->foodbanks_videofile,
-                'foodbanks_imagefile' => $foodbanks->foodbanks_imagefile,
+                'foodbanks_videofile' => Url::foodbankvideo() . $foodbanks->foodbanks_videofile,
+                'foodbanks_imagefile' => Url::foodbankimg() . $foodbanks->foodbanks_imagefile,
                 );
            }
           } else {
@@ -53,7 +54,7 @@ class FoodBankController extends Controller
           foreach($foodbankgalleries as $foodbankgallery) {
               $gallerydata [] = array(
               'foodbanksid' => $foodbankgallery->foodbanksid,
-              'foodbankgalleries_file' => $foodbankgallery->foodbankgalleries_file,
+              'foodbankgalleries_file' => Url::foodbankgallery() . $foodbankgallery->foodbankgalleries_file,
               );
           }
          } else {
@@ -77,8 +78,8 @@ class FoodBankController extends Controller
               $data = array(
                 'foodbanks_id' => $foodbankone->foodbanks_id,
                 'foodbanks_name' => $foodbankone->foodbanks_name,
-                'foodbanks_videofile' => $foodbankone->foodbanks_videofile,
-                'foodbanks_imagefile' => $foodbankone->foodbanks_imagefile,
+                'foodbanks_videofile' => Url::foodbankvideo() . $foodbankone->foodbanks_videofile,
+                'foodbanks_imagefile' => Url::foodbankimg() . $foodbankone->foodbanks_imagefile,
             );
             } else {
               $data = array(
@@ -96,7 +97,7 @@ class FoodBankController extends Controller
             foreach($foodbankgalleries as $foodbankgallery) {
                 $gallerydata [] = array(
                 'foodbanksid' => $foodbankgallery->foodbanksid,
-                'foodbankgalleries_file' => $foodbankgallery->foodbankgalleries_file,
+                'foodbankgalleries_file' => Url::foodbankgallery() . $foodbankgallery->foodbankgalleries_file,
                 );
             }
            } else {

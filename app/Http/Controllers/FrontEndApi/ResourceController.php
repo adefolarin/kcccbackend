@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class ResourceController extends Controller
 {
@@ -37,7 +38,7 @@ class ResourceController extends Controller
                 $data [] = array(
                 'resources_id' => $resource->resources_id,
                 'resources_name' => $resource->resources_name,
-                'resources_file' => $resource->resources_file,
+                'resources_file' => Url::resource() . $resource->resources_file,
                 );
             }
           } else {

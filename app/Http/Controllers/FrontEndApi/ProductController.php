@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class ProductController extends Controller
 {
@@ -34,7 +35,7 @@ class ProductController extends Controller
                      'products_id' => $product->products_id,
                      'products_name' => $product->products_name,
                      'products_price' => $product->products_price,
-                     'products_image' => $product->products_image,
+                     'products_image' => Url::product() . $product->products_image,
                    );
                 }
             } else {
@@ -55,7 +56,7 @@ class ProductController extends Controller
                      'products_id' => $product->products_id,
                      'products_name' => $product->products_name,
                      'products_price' => $product->products_price,
-                     'products_image' => $product->products_image,
+                     'products_image' => Url::product() .$product->products_image,
                    );
                 
             } else {
@@ -81,7 +82,7 @@ class ProductController extends Controller
                  'products_id' => $product->products_id,
                  'products_name' => $product->products_name,
                  'products_price' => $product->products_price,
-                 'products_image' => $product->products_image,
+                 'products_image' => Url::product() . $product->products_image,
                );
             }
         } else {

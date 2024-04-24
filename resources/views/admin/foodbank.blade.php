@@ -84,10 +84,10 @@
                       @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="foodbanks_title">Food Bank Name</label>
                         <input type="text" class="form-control"  name="foodbanks_name" id="foodbanks_name" placeholder="Food Bank Name" required >
-                    </div> 
+                    </div>-->
                      
                     <div class="form-group">
                        <label>Food Bank Date</label>
@@ -140,10 +140,6 @@
                       @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
-                        <label for="foodbanks_title">Name</label>
-                        <input type="text" class="form-control"  name="foodbanks_name" id="foodbanks_name" placeholder="Food Bank Name" required value="{{ $foodbankone['foodbanks_name'] }}">
-                    </div> 
                     <div class="form-group">
                        <label>Food Bank Date</label>
                        <div class="input-group date" id="foodbanks_date" 
@@ -200,7 +196,6 @@
                
                   <tr>
                     <th>Category</th>
-                    <th>Name</th>
                     <th>Image</th>
                     <th>Video</th>
                     <th>Gallery</th>
@@ -213,7 +208,6 @@
                     @foreach($foodbanks as $foodbank)           
                   <tr>
                     <td>{{ ucwords($foodbank->foodbankcategories_name) }}</td>
-                    <td>{{ ucwords($foodbank->foodbanks_name) }}</td>
                     <td>
                         @if(!empty($foodbank->foodbanks_imagefile))
                         <div id="div_img">
@@ -227,7 +221,7 @@
                        @if(!empty($foodbank->foodbanks_videofile))
                        <div id="div_video">
                         <video class="embed-responsive-item" controls>
-                              <source src="{{ asset('storage/admin/videos/foodbanks/'.$foodbank->foodbanks_videofile) }}" type="video/mp4">
+                              <source src="{{ asset('storage/app/public/admin/videos/foodbanks/'.$foodbank->foodbanks_videofile) }}" type="video/mp4">
                               Your browser does not support the video tag.
                          </video>
                       </div>

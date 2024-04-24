@@ -178,7 +178,7 @@
                     <td>{{ ucwords($resource->resources_name) }}</td>
                     <td>
                        <div id="div_img">
-                         <a  href="{{ url('storage/admin/docs/resources/'.$resource->resources_file) }}" target="_blank">
+                         <a  href="{{ url('storage/app/public/admin/docs/resources/'.$resource->resources_file) }}" target="_blank">
                            {{ ucwords($resource->resources_name) }}
                          </a>
                        </div>

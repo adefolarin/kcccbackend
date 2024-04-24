@@ -316,7 +316,7 @@ Route::get('/', function () {
 
         // Food Bank
         Route::get('/admin/foodbank/{id?}', [FoodBankController::class,'index']);
-        Route::get('/admin/foodbank', [FoodBankController::class,'store']);
+        Route::post('/admin/foodbank', [FoodBankController::class,'store']);
         //Route::get('/admin/foodbank-add', [FoodBankController::class,'create']);
         Route::post('/admin/foodbank/{id?}', [FoodBankController::class,'update']);
         //Route::get('/admin/foodbank-edit/{id?}', [FoodBankController::class,'edit']);

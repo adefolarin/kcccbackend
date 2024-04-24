@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class EventController extends Controller
 {
@@ -23,7 +24,6 @@ class EventController extends Controller
         //$eventcategories = EventCategory::query()->get();
 
         //$events = Event::get();
-        $url = "https://adeajalaministries.org/kcccbackend/admin/img/events/";
 
         $now = date("Y-m-d H:i");
 
@@ -45,7 +45,7 @@ class EventController extends Controller
                 $data [] = array(
                 'events_id' => $event->events_id,
                 'events_title' => $event->events_title,
-                'events_file' =>  $url . $event->events_file,
+                'events_file' =>  Url::event() . $event->events_file,
                 'events_startdatemonth' => date("M j", strtotime($event->events_startdate)),
                 'events_starttime' => date("g:i a", strtotime($event->events_startdate)),
                 'events_startdate' => $event->events_startdate,
@@ -83,7 +83,7 @@ class EventController extends Controller
                 'events_id' => $eventone->events_id,
                 'events_title' => $eventone->events_title,
                 'events_desc' => $eventone->events_desc,
-                'events_file' => $eventone->events_file,
+                'events_file' => Url::event() . $eventone->events_file,
                 'events_address' => $eventone->events_address,
                 'events_venue' => $eventone->events_venue,
                 'events_organizer' => $eventone->events_organizer,
@@ -109,7 +109,7 @@ class EventController extends Controller
             foreach($eventgalleries as $eventgallery) {
                 $gallerydata [] = array(
                 'eventsid' => $eventgallery->eventsid,
-                'eventgalleries_file' => $eventgallery->eventgalleries_file,
+                'eventgalleries_file' => Url::eventgallery() . $eventgallery->eventgalleries_file,
                 );
             }
            } else {
@@ -151,7 +151,7 @@ class EventController extends Controller
                 $data [] = array(
                 'events_id' => $event->events_id,
                 'events_title' => $event->events_title,
-                'events_file' => $event->events_file,
+                'events_file' => Url::event() . $event->events_file,
                 'events_startdatemonth' => date("M j", strtotime($event->events_startdate)),
                 'events_starttime' => date("g:i a", strtotime($event->events_startdate)),
                 'events_startdate' => $event->events_startdate,

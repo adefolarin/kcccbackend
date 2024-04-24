@@ -78,7 +78,7 @@
                     @else
                       <div id="div_video">
                         <video class="embed-responsive-item" controls>
-                              <source src="{{ asset('storage/admin/videos/banners/'.$banner['banner_file']) }}" type="video/mp4">
+                              <source src="{{ asset('storage/app/public/admin/videos/banners/'.$banner['banner_file']) }}" type="video/mp4">
                               Your browser does not support the video tag.
                          </video>
                       </div>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class DepartmentController extends Controller
 {
@@ -36,7 +37,7 @@ class DepartmentController extends Controller
                 'deptcategories_id' => $department->deptcategories_id,
                 'deptcategories_name' => $department->deptcategories_name,
                 'departments_content' => $department->departments_content,
-                'departments_file' => $department->departments_file,
+                'departments_file' => Url::department() . $department->departments_file,
                 'departments_status' => $department->departments_status,
                 );
             }
@@ -65,7 +66,7 @@ class DepartmentController extends Controller
                 'deptcategories_id' => $departmentone->deptcategories_id,
                 'deptcategories_name' => $departmentone->deptcategories_name,
                 'departments_content' => $departmentone->departments_content,
-                'departments_file' => $departmentone->departments_file,
+                'departments_file' => Url::department() . $departmentone->departments_file,
                 'departments_status' => $departmentone->departments_status,
             );
             } else {
@@ -84,7 +85,7 @@ class DepartmentController extends Controller
             foreach($deptgalleries as $departmentgallery) {
                 $deptgallerydata [] = array(
                 'deptsid' => $departmentgallery->deptsid,
-                'deptgalleries_file' => $departmentgallery->deptgalleries_file,
+                'deptgalleries_file' => Url::departmentgallery() . $departmentgallery->deptgalleries_file,
                 );
             }
            } else {
@@ -133,7 +134,7 @@ class DepartmentController extends Controller
                 'deptcategories_id' => $department->deptcategories_id,
                 'deptcategories_name' => $department->deptcategories_name,
                 'departments_content' => $department->departments_content,
-                'departments_file' => $department->departments_file,
+                'departments_file' => Url::department() . $department->departments_file,
                 'departments_status' => $department->departments_status,
                 );
             }

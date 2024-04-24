@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use App\Http\Controllers\FrontEndApi\Url;
 
 class NewsController extends Controller
 {
@@ -19,8 +20,6 @@ class NewsController extends Controller
      */
     public function index($newsid = null)
     {
-
-        $url = "https://adeajalaministries.org/kcccbackend/admin/img/news/";
         //$newscategories = NewsCategory::query()->get();
 
         //$news = News::get();
@@ -38,7 +37,7 @@ class NewsController extends Controller
                 $data [] = array(
                 'news_id' => $news->news_id,
                 'news_title' => $news->news_title,
-                'news_file' => $url . $news->news_file,
+                'news_file' => Url::news() . $news->news_file,
                 'news_content' => $news->news_content,
                 'news_date' => $news->news_date,
                 );
@@ -64,7 +63,7 @@ class NewsController extends Controller
               $data = array(
                 'news_id' => $newsone->news_id,
                 'news_title' => $newsone->news_title,
-                'news_file' => $url . $newsone->news_file,
+                'news_file' => Url::news() . $newsone->news_file,
                 'news_content' => $newsone->news_content,
                 'news_date' => $newsone->news_date,
             );

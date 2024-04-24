@@ -71,14 +71,12 @@ class FoodBankController extends Controller
 
                 $rules = [
                     'foodbankcategoriesid' => 'required',
-                    'foodbanks_name' => 'required',
                     'foodbanks_imagefile' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5240',
                     'foodbanks_videofile' => 'mimes:mp4|max:20240',
                     'foodbanks_date' => 'required',
                 ];
                 $customMessages = [
                     'foodbankcategoriesid.required' => 'Name of Food Bank Category is required',
-                    'foodbanks_name.required' => 'Food Bank name is required',
                     'foodbanks_imagefile.mimes' => "The Image format is not allowed",
                     'foodbanks_imagefile.max' => "Image upload size can't exceed 5MB",
                     'foodbanks_videofile.mimes' => "The Video format is not allowed",
@@ -114,7 +112,6 @@ class FoodBankController extends Controller
               $store = [
                 [
                 'foodbankcategoriesid' => $data['foodbankcategoriesid'],
-                'foodbanks_name' => $data['foodbanks_name'],
                 'foodbanks_imagefile' => $fileName,
                 'foodbanks_videofile' => $fileVideoName,
                 'foodbanks_date' => $data['foodbanks_date'],
@@ -161,14 +158,12 @@ class FoodBankController extends Controller
             //  Vallidations
             $rules = [
                 'foodbankcategoriesid' => 'required',
-                'foodbanks_name' => 'required',
                 'foodbanks_imagefile' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5240',
                 'foodbanks_videofile' => 'mimes:mp4|max:20240',
                 'foodbanks_date' => 'required',
             ];
             $customMessages = [
                 'foodbankcategoriesid.required' => 'Name of Food Bank Category is required',
-                'foodbanks_name.required' => 'Food Bank name is required',
                 'foodbanks_imagefile.mimes' => "The Image format is not allowed",
                 'foodbanks_imagefile.max' => "Image upload size can't exceed 5MB",
                 'foodbanks_videofile.mimes' => "The Video format is not allowed",
@@ -209,7 +204,6 @@ class FoodBankController extends Controller
               $store = [
             
                 'foodbankcategoriesid' => $data['foodbankcategoriesid'],
-                'foodbanks_name' => $data['foodbanks_name'],
                 'foodbanks_imagefile' => $fileName,
                 'foodbanks_videofile' => $fileVideoName,
                 'foodbanks_date' => $data['foodbanks_date'],
