@@ -108,8 +108,8 @@ class EventController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                ///$storePath = 'admin/img/events/';
-                $storePath = public_path('admin/img/events/');
+                $storePath = 'admin/img/events/';
+                //$storePath = public_path('admin/img/events/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                       
@@ -209,8 +209,8 @@ class EventController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                //$storePath = 'admin/img/events/';
-                $storePath = public_path('admin/img/events/');
+                $storePath = 'admin/img/events/';
+                //$storePath = public_path('admin/img/events/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                             

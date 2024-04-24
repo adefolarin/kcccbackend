@@ -93,8 +93,8 @@ class DepartmentController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                ///$storePath = 'admin/img/department/';
-                $storePath = public_path('admin/img/departments/');
+                $storePath = 'admin/img/departments/';
+                //$storePath = public_path('admin/img/departments/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                       
@@ -171,8 +171,8 @@ class DepartmentController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                //$storePath = 'admin/img/department/';
-                $storePath = public_path('admin/img/departments/');
+                $storePath = 'admin/img/departments/';
+                //$storePath = public_path('admin/img/departments/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                             

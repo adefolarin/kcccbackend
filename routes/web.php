@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\GivingController;
 use App\Http\Controllers\Admin\DeptGalleryController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\DelAccController;
+use App\Http\Controllers\Admin\VersionController;
 
 
 /*
@@ -421,9 +422,17 @@ Route::get('/', function () {
         Route::post('/admin/review', [ReviewController::class,'store']);
         Route::post('/admin/review/{id?}', [ReviewController::class,'update']);
         Route::get('/admin/delete-review/{id?}', [ReviewController::class,'destroy']);
+
+            // Version
+        Route::get('/admin/version/{id?}', [VersionController::class,'index']);
+        Route::post('/admin/version', [VersionController::class,'store']);
+        Route::post('/admin/version/{id?}', [VersionController::class,'update']);
+        Route::get('/admin/delete-version/{id?}', [VersionController::class,'destroy']);
         
      
     });
+
+
 
     Route::get('/mobiledonation', [DonationController::class,'mobileindex']);
     Route::post('/donation-paypal', [DonationController::class,'paypal']);
@@ -432,5 +441,9 @@ Route::get('/', function () {
 
     Route::get('/delacc', [DelAccController::class,'mobileindex']);
     Route::post('/delacc', [DelAccController::class,'store']);
+
+    Route::get('/storage/{extra}', function ($extra) {
+        return redirect("/public/storage/$extra");
+    })->where("extra", '.*');
 
 //});

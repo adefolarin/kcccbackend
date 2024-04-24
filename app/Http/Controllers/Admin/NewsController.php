@@ -97,8 +97,8 @@ class NewsController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                ///$storePath = 'admin/img/news/';
-                $storePath = public_path('admin/img/news/');
+                $storePath = 'admin/img/news/';
+                //$storePath = public_path('admin/img/news/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                       
@@ -178,8 +178,8 @@ class NewsController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                //$storePath = 'admin/img/news/';
-                $storePath = public_path('admin/img/news/');
+                $storePath = 'admin/img/news/';
+                //$storePath = public_path('admin/img/news/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                             

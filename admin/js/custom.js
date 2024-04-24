@@ -109,7 +109,7 @@ $(document).ready(function() {
               text: "Deletion Successful.",
               icon: "success"
             }); 
-            window.location.href = "/admin/delete-" + record + '/' + recordid;
+            window.location.href = "../admin/delete-" + record + '/' + recordid;
           }
         });
     });
@@ -143,7 +143,7 @@ $(document).ready(function() {
               text: "Deletion Successful.",
               icon: "success"
             }); 
-            window.location.href = "/admin/delete-" + record + '/' + recordid;
+            window.location.href = "../admin/delete-" + record + '/' + recordid;
           }
         });
       } else {
@@ -182,7 +182,7 @@ $(document).ready(function() {
               text: "Deletion Successful.",
               icon: "success"
             }); 
-            window.location.href = "/admin/delete-" + record + '/' + recordid + '/' + deptmembregs_dept;
+            window.location.href = "../admin/delete-" + record + '/' + recordid + '/' + deptmembregs_dept;
           }
         });
       
@@ -210,7 +210,7 @@ $(document).ready(function() {
               text: "Deletion Successful.",
               icon: "success"
             }); 
-            window.location.href = "/admin/delete-" + record + '/' + recordid + '/' + eventregs_event;
+            window.location.href = "../admin/delete-" + record + '/' + recordid + '/' + eventregs_event;
           }
         });
       

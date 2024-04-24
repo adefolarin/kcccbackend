@@ -79,16 +79,9 @@ class DelAccController extends Controller
                ];
 
               
-               try {
-                 Mail::to('adefolarin2017@gmail.com')->send(new DelAccMail($mailData));
+                if(Mail::to('adefolarin2017@gmail.com')->send(new DelAccMail($mailData))) {
                   return redirect('delacc')->with('success_message', $message);
-               // } else {
-                 // return redirect('delacc')->with('error_message', $error_message);
-                //}
-               }
-               catch(Exception $e) {
-                  return redirect('delacc')->with('error_message', $error_message);
-               }
+                }
               
 
           }

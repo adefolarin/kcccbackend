@@ -20,6 +20,7 @@ class NewsController extends Controller
     public function index($newsid = null)
     {
 
+        $url = "https://adeajalaministries.org/kcccbackend/admin/img/news/";
         //$newscategories = NewsCategory::query()->get();
 
         //$news = News::get();
@@ -37,7 +38,7 @@ class NewsController extends Controller
                 $data [] = array(
                 'news_id' => $news->news_id,
                 'news_title' => $news->news_title,
-                'news_file' => $news->news_file,
+                'news_file' => $url . $news->news_file,
                 'news_content' => $news->news_content,
                 'news_date' => $news->news_date,
                 );
@@ -63,7 +64,7 @@ class NewsController extends Controller
               $data = array(
                 'news_id' => $newsone->news_id,
                 'news_title' => $newsone->news_title,
-                'news_file' => $newsone->news_file,
+                'news_file' => $url . $newsone->news_file,
                 'news_content' => $newsone->news_content,
                 'news_date' => $newsone->news_date,
             );

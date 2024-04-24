@@ -98,8 +98,8 @@ class ProductController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                ///$storePath = 'admin/img/products/';
-                $storePath = public_path('admin/img/products/');
+                $storePath = 'admin/img/products/';
+                //$storePath = public_path('admin/img/products/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                       
@@ -183,8 +183,8 @@ class ProductController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                //$storePath = 'admin/img/products/';
-                $storePath = public_path('admin/img/products/');
+                $storePath = 'admin/img/products/';
+                //$storePath = public_path('admin/img/products/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                             

@@ -23,6 +23,7 @@ class EventController extends Controller
         //$eventcategories = EventCategory::query()->get();
 
         //$events = Event::get();
+        $url = "https://adeajalaministries.org/kcccbackend/admin/img/events/";
 
         $now = date("Y-m-d H:i");
 
@@ -44,7 +45,7 @@ class EventController extends Controller
                 $data [] = array(
                 'events_id' => $event->events_id,
                 'events_title' => $event->events_title,
-                'events_file' => $event->events_file,
+                'events_file' =>  $url . $event->events_file,
                 'events_startdatemonth' => date("M j", strtotime($event->events_startdate)),
                 'events_starttime' => date("g:i a", strtotime($event->events_startdate)),
                 'events_startdate' => $event->events_startdate,

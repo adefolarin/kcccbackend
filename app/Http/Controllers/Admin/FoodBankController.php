@@ -97,8 +97,8 @@ class FoodBankController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                ///$storePath = 'admin/img/foodbanks/';
-                $storePath = public_path('admin/img/foodbanks/');
+                $storePath = 'admin/img/foodbanks/';
+                //$storePath = public_path('admin/img/foodbanks/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                       
@@ -186,8 +186,8 @@ class FoodBankController extends Controller
                 $image = $manager->read($image_tmp);
                 //$image = $image->resize(60,60);
     
-                //$storePath = 'admin/img/foodbanks/';
-                $storePath = public_path('admin/img/foodbanks/');
+                $storePath = 'admin/img/foodbanks/';
+                //$storePath = public_path('admin/img/foodbanks/');
                 //$image->toJpeg(80)->save($storePath . $imageName);
                 $image->save($storePath . $fileName);
                             

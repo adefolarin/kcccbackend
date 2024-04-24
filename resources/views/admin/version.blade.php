@@ -107,15 +107,15 @@
 
                     <div class="form-group">
                         <label for="versions_name">Version Name</label>
-                        <input type="text" class="form-control"  name="versions_name" id="versions_name" placeholder="Version Name" required value="{{ $versionone['version_id'] }}">
+                        <input type="text" class="form-control"  name="versions_name" id="versions_name" placeholder="Version Name" required value="{{ $versionone['versions_name'] }}">
                     </div> 
                     <div class="form-group">
                         <label for="versions_androidnumber">Android Version Number</label>
-                        <input type="text" class="form-control"  name="versions_androidnumber" id="versions_androidnumber" placeholder="Android Version Number" required value="{{ $versionone['version_id'] }}">
+                        <input type="text" class="form-control"  name="versions_androidnumber" id="versions_androidnumber" placeholder="Android Version Number" required value="{{ $versionone['versions_androidnumber'] }}">
                     </div> 
                     <div class="form-group">
                         <label for="versions_iosnumber">Version Number</label>
-                        <input type="text" class="form-control"  name="versions_iosnumber" id="versions_iosnumber" placeholder="IOS Version Number" required value="{{ $versionone['version_id'] }}">
+                        <input type="text" class="form-control"  name="versions_iosnumber" id="versions_iosnumber" placeholder="IOS Version Number" required value="{{ $versionone['versions_iosnumber'] }}">
                     </div> 
           
                     </div>
@@ -145,7 +145,9 @@
                   
                 <thead>
                   <tr>
-                    <th>Date and Time</th>
+                    <th>Verion Name</th>
+                    <th>Android</th>
+                    <th>IOS</th>
                     <th>Actions </th>
                   </tr>
                 <thead>
@@ -153,14 +155,16 @@
                   <tbody> 
                     @foreach($versions as $version)           
                   <tr>
-                    <td>{{ ucwords($version->versioncategories_datetime) }}</td>
+                    <td>{{ ucwords($version['versions_name']) }}</td>
+                    <td>{{ ucwords($version['versions_androidnumber']) }}</td>
+                    <td>{{ ucwords($version['versions_iosnumber']) }}</td>
                     <td>                     
-                      <a href="{{  url('admin/version/'.$version->versions_id) }}" style="color:#3f6ed3;">
+                      <a href="{{  url('admin/version/'.$version['versions_id']) }}" style="color:#3f6ed3;">
                         <i class="fas fa-edit"></i>
                       </a>
                       &nbsp;&nbsp;
                       <a href= "javascript:void(0)" record="version" 
-                      recordid="{{ $version->versions_id }}" <?php //"{{  url('admin/delete-cms-page/'.$page['id']) }}" ?> style="color:#ee4b2b;" class="confirmDelete" name="Version" title="Delete Version">
+                      recordid="{{ $version['versions_id'] }}" <?php //"{{  url('admin/delete-cms-page/'.$page['id']) }}" ?> style="color:#ee4b2b;" class="confirmDelete" name="Version" title="Delete Version">
                         <i class="fas fa-trash"></i>
                       </a> 
                     </td>
