@@ -59,6 +59,11 @@ Route::get('/', function () {
     return view('notfound');
 });
 
+Route::get('/livetv', function () {
+    return view('livetv');
+});
+
+
 //Route::prefix('/admin')->group(function(){
     Route::match(['get','post'],'/admin/login',[AdminController::class, 'login']);
 

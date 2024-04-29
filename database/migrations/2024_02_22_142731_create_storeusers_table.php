@@ -18,9 +18,11 @@ return new class extends Migration
                 $table->string('storeusers_lname');
                 $table->string('storeusers_gender');
                 $table->string('storeusers_pnum');
-                $table->string('storeusers_email')->unique();
+                $table->string('storeusers_email');
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('storeusers_password');
+                $table->string('storeusers_code')->nullable();
+                $table->dateTime('storeusers_resetdate');
                 $table->rememberToken();
                 $table->timestamps();
             });
