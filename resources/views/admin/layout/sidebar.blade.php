@@ -173,9 +173,8 @@
                   <p>Sermon Categories</p>
                 </a>
               </li>
-
-              <?php 
-              /*
+ 
+              
               @if(Session::get('page') == "podcastcategory")
                 @php $active = "active" @endphp
               @else
@@ -187,8 +186,8 @@
                   <p>Podcast Categories</p>
                 </a>
               </li>
-              */
-              ?>
+              
+            
 
               @if(Session::get('page') == "newscategory")
                 @php $active = "active" @endphp
@@ -339,6 +338,20 @@
               <i class="nav-icon fas fa-video"></i>
               <p>
                 Sermons
+              </p>
+            </a>
+          </li>
+
+          @if(Session::get('page') == "podcasts")
+             @php $active = "active" @endphp
+          @else
+             @php $active = "" @endphp
+          @endif
+          <li class="nav-item">
+            <a href="{{ url('admin/podcast') }}" class="nav-link {{ $active }}">
+              <i class="nav-icon fas fa-folder"></i>
+              <p>
+                Podcats
               </p>
             </a>
           </li>

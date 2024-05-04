@@ -15,13 +15,14 @@ return new class extends Migration
         Schema::create('podcasts', function (Blueprint $table) {
             $table->bigInteger('podcasts_id')->autoIncrement();
             $table->bigInteger('podcastcategoriesid');
-            $table->text('podcast_title');
-            $table->text('podcast_file');
-            $table->date('podcast_date');
-            $table->text('podcast_location')->nullable(true);
-            $table->text('podcast_preacher')->nullable(true);
-            $table->text('podcast_likes')->nullable(true);
-            $table->text('podcast_shares')->nullable(true);
+            $table->text('podcasts_title');
+            $table->text('podcasts_file');
+            $table->text('podcasts_filetype');
+            $table->date('podcasts_date');
+            $table->text('podcasts_location')->nullable(true);
+            $table->text('podcasts_preacher')->nullable(true);
+            $table->text('podcasts_likes')->nullable(true);
+            $table->text('podcasts_shares')->nullable(true);
             $table->timestamps();
         });
         }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('podcasts');
+        Schema::dropIfExists('podcastss');
     }
 };

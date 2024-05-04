@@ -58,7 +58,7 @@ class EventController extends Controller
             }
             return response()->json(['status' => true, 'events'=>$data]);
           } else {
-            $data = array(
+            $data [] = array(
                 'events_title' => ''
             );
             return response()->json(['status' => false, 'events'=>$data]);

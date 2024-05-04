@@ -77,9 +77,9 @@ class PodcastCategoryController extends Controller
         
                //echo "<prev>"; print_r($podcastcategoryone['podcastcategories_name']); die;
 
-              if($podcastcategoryone['podcastcategories_name'] == $data['podcastcategories_name']) {
-                return redirect('admin/podcastcategory')->with('error_message', 'Podcast Category Name Already Exists'); 
-              } else {
+               if (PodcastCategory::where('podcastcategories_name', $data['podcastcategories_name'])->exists()) {
+                return redirect('admin/podcastcategory')->with('error_message', 'Podcast Category Already Exists');
+               }else {
                 $podcastcategory->insert($store);
                 return redirect('admin/podcastcategory')->with('success_message', $message);
               }
@@ -133,8 +133,13 @@ class PodcastCategoryController extends Controller
                
             ];
 
+            if (PodcastCategory::where('podcastcategories_name', $data['podcastcategories_name'])->exists()) {
+                return redirect('admin/podcastcategory/'.$data['podcastcategories_id'])->with('error_message', 'Podcast Category Already Exists');
+            }
+            else {
               PodcastCategory::where('podcastcategories_id',$data['podcastcategories_id'])->update($store);
               return redirect('admin/podcastcategory/'.$data['podcastcategories_id'])->with('success_message', $message);
+            }
 
           }   
     }

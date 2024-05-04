@@ -216,6 +216,12 @@
       }
     );
 
+    $('#podcasts_date').datetimepicker(
+      { 
+        format: 'Y-MM-DD',
+      }
+    );
+
     $('#reviews_year').datetimepicker(
       { 
         format: 'Y',

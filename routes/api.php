@@ -165,7 +165,9 @@ Route::post('/mobilekcile', [KcileController::class,'mobilestore']);
 Route::post('/reviewsearch', [ReviewController::class,'reviewSearch']);
 
 // Podcasts
-Route::get('/podcast', [PodcastController::class,'podcastSearch']);
+Route::get('/podcastsearch', [PodcastController::class,'podcastSearch']);
+
+Route::get('/podcast', [PodcastController::class,'index']);
 
 // volforms
 Route::get('/volform', [VolFormController::class,'index']);
