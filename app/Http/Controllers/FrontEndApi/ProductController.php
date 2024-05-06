@@ -27,12 +27,13 @@ class ProductController extends Controller
 
         if($productsid == null) {
 
-            $products = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->get();
+            $products = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->get();
 
             if($productsnumrw > 0) {
                 foreach($products as $product) {
                    $data [] = array(
                      'products_id' => $product->products_id,
+                     'productcategories_id' => $product->productcategoriesid,
                      'products_name' => $product->products_name,
                      'products_price' => $product->products_price,
                      'products_image' => Url::product() . $product->products_image,
@@ -51,9 +52,10 @@ class ProductController extends Controller
             $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->count();
 
             if($productsnumrw > 0) {
-                $product = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->first();
+                $product = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->first();
                    $data = array(
                      'products_id' => $product->products_id,
+                     'productcategories_id' => $product->productcategoriesid,
                      'products_name' => $product->products_name,
                      'products_price' => $product->products_price,
                      'products_image' => Url::product() .$product->products_image,
@@ -76,10 +78,13 @@ class ProductController extends Controller
         $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('productcategories_id',$productcatid)->count();
 
         if($productsnumrw > 0) {
-            $products = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('productcategories_id',$productcatid)->get();
+            $products = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->where('productcategories_id',$productcatid)->get();
+
+
             foreach($products as $product) {
                $data [] = array(
                  'products_id' => $product->products_id,
+                 'productcategories_id' => $product->productcategoriesid,
                  'products_name' => $product->products_name,
                  'products_price' => $product->products_price,
                  'products_image' => Url::product() . $product->products_image,
@@ -106,6 +111,40 @@ class ProductController extends Controller
         }
           
         return response()->json(['status' => true, 'products' => $data, 'productcat' => $productcatdata], 201);
+       
+    }
+
+    public function getProductByCats() {
+
+        $productcatnumrw = DB::table('productcategories')->count();
+
+        if($productcatnumrw > 0) {
+            $productcats = DB::table('productcategories')->get();
+     
+            foreach($productcats as $productcat) {
+
+                $products = DB::table('products')
+                ->where('productcategoriesid',$productcat->productcategories_id)->get();
+
+               foreach($products as $product) {
+               $data [] = array(
+                 'products_id' => $product->products_id,
+                 'productcategories_id' => $product->productcategoriesid,
+                 'products_name' => $product->products_name,
+                 'products_price' => $product->products_price,
+                 'products_image' => Url::product() . $product->products_image,
+               );
+               }
+            }
+        } else {
+            $data = array(
+               'products_name' => '',
+            );
+        }
+
+
+          
+        return response()->json(['status' => true, 'products' => $data], 201);
        
     }
 
