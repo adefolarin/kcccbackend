@@ -219,7 +219,8 @@ Route::get('/storeuser/{id?}', [StoreUserController::class,'index']);
 
     // Product
     Route::get('/product/{id?}', [ProductController::class,'index']);
-    Route::get('/productbycat/{id?}', [ProductController::class,'getProductByCat']);
+    //Route::get('/productbycat/{id?}', [ProductController::class,'getProductByCat']);
+    Route::post('/productbycat', [ProductController::class,'getProductByCat']);
     Route::get('/productbycats', [ProductController::class,'getProductByCats']);
     Route::post('/productlikes', [ProductController::class,'productLikes']);
 

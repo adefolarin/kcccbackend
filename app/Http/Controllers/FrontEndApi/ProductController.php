@@ -73,7 +73,7 @@ class ProductController extends Controller
 
     }
 
-    public function getProductByCat($productcatid) {
+    public function getProductByCatOLd($productcatid) {
 
         $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('productcategories_id',$productcatid)->count();
 
@@ -114,19 +114,20 @@ class ProductController extends Controller
        
     }
 
-    public function getProductByCats() {
+    public function getProductByCat(Request $request) {
 
-        $productcatnumrw = DB::table('productcategories')->count();
+        if($request->isMethod('post')) {
+        $data = $request->all();
 
-        if($productcatnumrw > 0) {
-            $productcats = DB::table('productcategories')->get();
-     
-            foreach($productcats as $productcat) {
+        $productcatid = $data['productcategoriesid'];
 
-                $products = DB::table('products')
-                ->where('productcategoriesid',$productcat->productcategories_id)->get();
+        $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('productcategories_id',$productcatid)->count();
 
-               foreach($products as $product) {
+        if($productsnumrw > 0) {
+            $products = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->where('productcategories_id',$productcatid)->get();
+
+
+            foreach($products as $product) {
                $data [] = array(
                  'products_id' => $product->products_id,
                  'productcategories_id' => $product->productcategoriesid,
@@ -134,7 +135,6 @@ class ProductController extends Controller
                  'products_price' => $product->products_price,
                  'products_image' => Url::product() . $product->products_image,
                );
-               }
             }
         } else {
             $data = array(
@@ -142,11 +142,26 @@ class ProductController extends Controller
             );
         }
 
+        $productcatnumrw = DB::table('productcategories')->where('productcategories_id',$productcatid)->count();
 
+        if($productcatnumrw > 0) {
+          $productcat = DB::table('productcategories')->where('productcategories_id',$productcatid)->first();
+
+          $productcatdata = array(
+             'productcategories_name' => $productcat->productcategories_name,
+          );
+        } else {
+           $productcatdata = array(
+                'productcategories_name' => '',
+            );
+        }
           
-        return response()->json(['status' => true, 'products' => $data], 201);
+        return response()->json(['status' => true, 'products' => $data, 'productcat' => $productcatdata], 201);
+     }
        
     }
+
+   
 
     public function productLikes(Request $request) {
 
