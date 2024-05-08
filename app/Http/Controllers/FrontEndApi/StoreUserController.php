@@ -88,7 +88,7 @@ class StoreUserController extends Controller
       $data = $request->all();
       //echo "<prev>"; print_r($data); die;
 
-      $message = "Registration Succussful";
+      $message = "Registration Successful";
 
       $rules = [
         'storeusers_fname' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
@@ -134,12 +134,28 @@ class StoreUserController extends Controller
         return response()->json([$validator->errors(), 422]);
       }
 
+      $emailnumrw = DB::table('storeusers')
+      ->where('storeusers_email',$data['storeusers_email'] )
+      ->count();
+
+      $pnumnumrw = DB::table('storeusers')
+      ->where('storeusers_pnum',$data['storeusers_pnum'] )
+      ->count();
+
 
       if ($data['storeusers_password'] != $data['storeusersconfirm_password']) {
         return response()->json(['status' => false, 'message' => 'Passwords Must Match']);
-      } else if ($data['storeusers_fname'] == "" || $data['storeusers_lname'] == "" || $data['storeusers_password'] == "" || $data['storeusers_gender'] == "" || $data['storeusers_pnum'] == "" || $data['storeusers_email'] == "") {
+      } 
+      else if ($data['storeusers_fname'] == "" || $data['storeusers_lname'] == "" || $data['storeusers_password'] == "" || $data['storeusers_gender'] == "" || $data['storeusers_pnum'] == "" || $data['storeusers_email'] == "") {
         return response()->json(['status' => false, 'message' => 'All Fields Are Required']);
-      } else {
+      }
+      else if ($emailnumrw > 0) {
+        return response()->json(['status' => false, 'message' => 'Email Already Exists']);
+      }
+      else if ($pnumnumrw > 0) {
+        return response()->json(['status' => false, 'message' => 'Phone Number Already Exists']);
+      }
+      else {
 
         DB::table("storeusers")->insert($store);
         return response()->json(['status' => true, 'message' => $message], 201);
@@ -155,14 +171,15 @@ class StoreUserController extends Controller
 
 
       $rules = [
-        'storeusers_email' => 'required|email|exists:storeusers',
+        //'storeusers_email' => 'required|email|exists:storeusers',
+        'storeusers_email' => 'required|email',
         'storeusers_password' => 'required',
       ];
 
       $customMessages = [
         'storeusers_email.required' => 'Email is required',
         'storeusers_email.email' => 'Valid Email is required',
-        'storeusers_email.exists' => 'Email does not exist',
+        //'storeusers_email.exists' => 'Email does not exist',
         'storeusers_password.required' => 'Password is required',
       ];
 
@@ -189,10 +206,10 @@ class StoreUserController extends Controller
           );
           return response()->json(['status' => true, 'message' => 'Login Successful', 'storeuserone' => $data], 201);
         } else {
-          return response()->json(['status' => false, 'error_message' => 'Invalid Email or Password']);
+          return response()->json(['status' => false, 'message' => 'Invalid Email or Password']);
         }
       } else {
-        return response()->json(['status' => false, 'error_message' => 'Invalid Email']);
+        return response()->json(['status' => false, 'message' => 'Email does not exists']);
       }
     }
     return view('storeuser.login');
