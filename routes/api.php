@@ -205,9 +205,13 @@ Route::get('/storeuser/{id?}', [StoreUserController::class,'index']);
 
 //Route::group(['middleware'=>['aamuser']], function() {
    
-    Route::match(['post'],'/storeupdatepassword', [StoreUserController::class,'updatePassword']);
+    Route::match(['post'],'/storeuserupdatepassword', [StoreUserController::class,'updatePassword']);
     Route::post('/storecheckcurrentpassword', [StoreUserController::class,'checkCurrentPassword']);
-    Route::post('/updatestoreuser', [StoreUserController::class,'updateStoreUserDetails']);
+    Route::post('/storeuserupdateuser', [StoreUserController::class,'updateStoreUserDetails']);
+    Route::post('/storeuserupdateemail', [StoreUserController::class,'updateEmail']);
+    Route::post('/storeuserupdatepnum', [StoreUserController::class,'updatePnum']);
+    Route::post('/storeusersendpasswordcode', [StoreUserController::class,'sendPasswordCode']);
+    Route::post('/storeuserpasswordreset', [StoreUserController::class,'resetPassword']);
     Route::get('/storeuser/logout', [StoreUserController::class,'logout']);
 
     // Ratings

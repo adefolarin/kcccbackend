@@ -225,14 +225,18 @@ class AamUserController extends Controller
       if($request->isMethod('post')) {
         $data = $request->all();
 
+        $emailnumrw = DB::table('aamusers')
+        ->where('aamusers_email',$data['aamusers_email'] )
+        ->count();
+
         $aamuser = DB::table("aamusers")->where('aamusers_id',$data['aamusers_id'])->first();
         // check if current aamusers_password is correct
             // Update New Password
-          if($data['aamusers_email'] != $aamuser->aamusers_email) {
+          if($emailnumrw > 0) {
+            return response()->json(['status' => false, 'message' => 'Email already exists']);
+          } else {
             AamUser::where('aamusers_id',$data['aamusers_id'])->update(['aamusers_email' => $data['aamusers_email']]);
             return response()->json(['status' => true, 'message' => 'Email Updated Succesfully']);
-          } else {
-            return response()->json(['status' => false, 'message' => 'Email already exists']);
           }
         
       }
@@ -244,14 +248,17 @@ class AamUserController extends Controller
       if($request->isMethod('post')) {
         $data = $request->all();
 
+        $pnumnumrw = DB::table('aamusers')
+        ->where('aamusers_pnum',$data['aamusers_pnum'] )
+        ->count();
         $aamuser = AamUser::where('aamusers_id',$data['aamusers_id'])->first();
         // check if current aamusers_password is correct
             // Update New Password
-          if($data['aamusers_pnum'] != $aamuser->aamusers_pnum) {
+          if($pnumnumrw > 0) {
+            return response()->json(['status' => false, 'message' => 'Phone Number already exists']);
+          } else {
             AamUser::where('aamusers_id',$data['aamusers_id'])->update(['aamusers_pnum' => $data['aamusers_pnum']]);
             return response()->json(['status' => true, 'message' => 'Phone Number Updated Succesfully']);
-          } else {
-            return response()->json(['status' => false, 'message' => 'Phone Number already exists']);
           }
         
       }
