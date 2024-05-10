@@ -24,6 +24,7 @@ use App\Http\Controllers\FrontEndApi\NewsLetterController;
 use App\Http\Controllers\FrontEndApi\VolunteerController;
 use App\Http\Controllers\FrontEndApi\ReviewController;
 use App\Http\Controllers\FrontEndApi\PodcastController;
+use App\Http\Controllers\FrontEndApi\PodcastControllerWeb;
 use App\Http\Controllers\FrontEndApi\VolFormController;
 use App\Http\Controllers\FrontEndApi\AamUserController;
 use App\Http\Controllers\FrontEndApi\StoreUserController;
@@ -164,10 +165,15 @@ Route::post('/mobilekcile', [KcileController::class,'mobilestore']);
 // Review
 Route::post('/reviewsearch', [ReviewController::class,'reviewSearch']);
 
-// Podcasts
-Route::get('/podcastsearch', [PodcastController::class,'podcastSearch']);
+// Podcasts Mobile
+Route::get('/podcast', [PodcastController::class,'podcastSearch']);
 
-Route::get('/podcast', [PodcastController::class,'index']);
+//Route::get('/podcast', [PodcastController::class,'index']);
+
+// Podcasts Web
+Route::get('/podcastsearch', [PodcastControllerWeb::class,'podcastSearchWeb']);
+
+Route::get('/podcastweb', [PodcastControllerWeb::class,'index']);
 
 // volforms
 Route::get('/volform', [VolFormController::class,'index']);
@@ -225,7 +231,7 @@ Route::get('/storeuser/{id?}', [StoreUserController::class,'index']);
     Route::get('/product/{id?}', [ProductController::class,'index']);
     //Route::get('/productbycat/{id?}', [ProductController::class,'getProductByCat']);
     Route::post('/productbycat', [ProductController::class,'getProductByCat']);
-    Route::get('/productbycats', [ProductController::class,'getProductByCats']);
+    Route::get('/productbycats/{id?}', [ProductController::class,'getProductByCats']);
     Route::post('/productlikes', [ProductController::class,'productLikes']);
 
     // Zip Code

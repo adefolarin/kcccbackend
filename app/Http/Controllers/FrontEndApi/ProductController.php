@@ -35,6 +35,8 @@ class ProductController extends Controller
                      'products_id' => $product->products_id,
                      'productcategories_id' => $product->productcategoriesid,
                      'products_name' => $product->products_name,
+                     'products_description' => $product->products_description,
+                     'productcategories_name' => $product->productcategories_name,
                      'products_price' => $product->products_price,
                      'products_image' => Url::product() . $product->products_image,
                    );
@@ -49,14 +51,16 @@ class ProductController extends Controller
 
         } else {
             
-            $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->count();
+            $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('products_id', $productsid)->count();
 
             if($productsnumrw > 0) {
-                $product = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->first();
+                $product = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.*')->where('products_id', $productsid)->first();
                    $data = array(
                      'products_id' => $product->products_id,
                      'productcategories_id' => $product->productcategoriesid,
                      'products_name' => $product->products_name,
+                     'products_description' => $product->products_description,
+                     'productcategories_name' => $product->productcategories_name,
                      'products_price' => $product->products_price,
                      'products_image' => Url::product() .$product->products_image,
                    );
@@ -73,7 +77,7 @@ class ProductController extends Controller
 
     }
 
-    public function getProductByCatOLd($productcatid) {
+    public function getProductByCats($productcatid) {
 
         $productsnumrw = DB::table('productcategories')->orderByDesc('products_id')->join('products','productcategories.productcategories_id','=', 'products.productcategoriesid')->select('products.*','productcategories.productcategories_name')->where('productcategories_id',$productcatid)->count();
 
@@ -86,6 +90,7 @@ class ProductController extends Controller
                  'products_id' => $product->products_id,
                  'productcategories_id' => $product->productcategoriesid,
                  'products_name' => $product->products_name,
+                 'productcategories_name' => $product->productcategories_name,
                  'products_price' => $product->products_price,
                  'products_image' => Url::product() . $product->products_image,
                );
@@ -132,6 +137,7 @@ class ProductController extends Controller
                  'products_id' => $product->products_id,
                  'productcategories_id' => $product->productcategoriesid,
                  'products_name' => $product->products_name,
+                 'productcategories_name' => $product->productcategories_name,
                  'products_price' => $product->products_price,
                  'products_image' => Url::product() . $product->products_image,
                );
