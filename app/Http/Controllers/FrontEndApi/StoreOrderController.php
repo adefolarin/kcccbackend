@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Mail;
+use DB;
 //use App\Mail\StoreOrderMail;
 use App\Models\StoreOrder;
 

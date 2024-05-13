@@ -37,7 +37,7 @@ use App\Http\Controllers\FrontEndApi\StorePaymentController;
 use App\Http\Controllers\FrontEndApi\VolCategoryController;
 use App\Http\Controllers\FrontEndApi\KcileController;
 use App\Http\Controllers\FrontEndApi\VersionController;
-
+use App\Http\Controllers\FrontEndApi\StoreCartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -236,6 +236,14 @@ Route::get('/storeuser/{id?}', [StoreUserController::class,'index']);
 
     // Zip Code
     Route::get('/zipcode', [ZipCodeController::class,'index']);
+
+    // Store Carts
+    Route::get('/storecart/{id?}', [StoreCartController::class,'index']);
+    Route::post('/storecart', [StoreCartController::class,'store']);
+    Route::post('/storecartupdateone', [StoreCartController::class,'updateone']);
+    Route::post('/storecartupdateall', [StoreCartController::class,'updateall']);
+    Route::post('/storecartdeleteone', [StoreCartController::class,'destroyone']);
+    Route::post('/storecartdeleteall', [StoreCartController::class,'destroyall']);
 
     // Store Order
     Route::get('/storeorder/{id?}', [StoreOrderController::class,'index']);
