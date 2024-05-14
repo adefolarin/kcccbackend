@@ -18,38 +18,33 @@ class StoreCartController extends Controller
     public function index($storusersid)
     {
 
-        $storecartsnumrw = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.productsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storusersid)->count();
+        $storecartsnumrw = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.storeproductsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storusersid)->count();
 
-        $storecarts = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.productsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storusersid)->get();
+        $storecarts = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.storeproductsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storusersid)->get();
 
 
             if($storecartsnumrw > 0) {
-                foreach($storecarts as $storecart) {
+                $total = 0;
+                foreach($storecarts as $storecart) {                  
                    $data [] = array(
-                    'storeusers_id' => $storecart->storeusersid,
-                    'storecarts_refid' => $storecart->storecarts_refid,
-                    'storecarts_price' => $storecart->storecarts_price,
+                    'productsname' => $storecart->products_name,
+                    'storeusersid' => $storecart->storeusersid,
+                    'storecarts_id' => $storecart->storecarts_id,
+                    'storeproductsid' => $storecart->storeproductsid,
                     'storecarts_qty' => $storecart->storecarts_qty,
-                    'storecarts_total' => $storecart->storecarts_total,
-                    'storecarts_currency' => $storecart->storecarts_currency,
-                    'storecarts_type' => $storecart->storecarts_type,
-                    'storecarts_status' => $storecart->storecart_status,
-                    'storecarts_date' => $storecart->storecarts_date,
-                    'logsname' => $storecart->logsname,
-                    'logspnum' => $storecart->logspnum,
-                    'logsemail' => $storecart->logsemail,
-                    'logsgender' => $storecart->logsgender,
-                    'logslocation' => $storecart->logslocation,
-                    'logsdelivery' => $storecart->logdelivery,
-                    'logsemail' => $storecart->logsemail,
-                    'logsdate' => $storecart->logsdate,
+                    'storeproductsprice' => $storecart->storeproductsprice,
+                    'storecarts_totalprice' => $storecart->storecarts_totalprice,
                    );
+                   $total = number_format($total + $storecart->storecarts_totalprice,2);
                 }
             } else {
                 $data = array(
-                   'storeusers_refid' => '',
+                   'storeusersid' => '',
                 );
+                $total = 0;
             }
+
+            return response()->json(['status' => true, 'carts' => $data, 'totalcarts' => $total], 201);
 
 
    }
@@ -142,7 +137,6 @@ class StoreCartController extends Controller
             $storeusersid = $data['storeusersid'];
             $storeproductsid = $data['storeproductsid'];
             $storecartsqty = $data['storecartsqty'];
-            $storeusersid = $data['storeusersid'];
   
             $storecartsnumrw = DB::table('storecarts')
             ->where('storeusersid',$storeusersid)
