@@ -14,11 +14,13 @@ return new class extends Migration
         if(!Schema::hasTable('storeorders')) {
             Schema::create('storeorders', function (Blueprint $table) {
                 $table->bigInteger('storeorders_id')->autoIncrement();
+                $table->bigInteger('productsid');
                 $table->bigInteger('storeusersid');
                 $table->string('storeorders_refid');
                 $table->decimal('storeorders_price',10,2);
                 $table->bigInteger('storeorders_qty');
                 $table->decimal('storeorders_total',10,2);
+                $table->decimal('storeorders_totalall',10,2);
                 $table->string('storeorders_currency');
                 $table->string('storeorders_type');
                 $table->string('storeorders_status');
@@ -26,7 +28,9 @@ return new class extends Migration
                 $table->string('logspnum');
                 $table->string('logsemail');
                 $table->string('logsgender');
-                $table->string('logslocation');
+                $table->string('logsstate');
+                $table->string('logscountry');
+                $table->string('logsaddress');
                 $table->string('logsdelivery');
                 $table->date('logsdate');
                 $table->dateTime('storeorders_date');

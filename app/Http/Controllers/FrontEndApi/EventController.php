@@ -32,7 +32,7 @@ class EventController extends Controller
         if($eventsid == null) {
            
           if($eventsnumrw > 0) {
-              $events = DB::table('eventcategories')->orderBy('events_startdate')->limit(3)->join('events','eventcategories.eventcategories_id','=', 'events.eventcategoriesid')->select('events.*','eventcategories.eventcategories_name')->where("events_enddate", ">", $now)->get();
+              $events = DB::table('eventcategories')->orderBy('events_startdate')->join('events','eventcategories.eventcategories_id','=', 'events.eventcategoriesid')->select('events.*','eventcategories.eventcategories_name')->where("events_enddate", ">", $now)->get();
 
                foreach($events as $event) {
                

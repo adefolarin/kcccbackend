@@ -9,6 +9,7 @@ use Mail;
 use DB;
 //use App\Mail\StoreOrderMail;
 use App\Models\StoreOrder;
+use App\Models\StoreCart;
 
 class StoreOrderController extends Controller
 {
@@ -39,7 +40,9 @@ class StoreOrderController extends Controller
                     'logspnum' => $storeorder->logspnum,
                     'logsemail' => $storeorder->logsemail,
                     'logsgender' => $storeorder->logsgender,
-                    'logslocation' => $storeorder->logslocation,
+                    'logsstate' => $storeorder->logsstate,
+                    'logscountry' => $storeorder->logscountry,
+                    'logsaddress' => $storeorder->logsaddress,
                     'logsdelivery' => $storeorder->logdelivery,
                     'logsemail' => $storeorder->logsemail,
                     'logsdate' => $storeorder->logsdate,
@@ -65,35 +68,54 @@ class StoreOrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($storeusersid,Request $request)
     {
     
         if($request->isMethod('post')) {
             $data = $request->all();
   
-            
-              $store = [
-                [
-                'storeusers_id' => $data['storeusersid'],
-                'storeorders_refid' => $data['storeordersrefid'],
-                'storeorders_price' => $data['storeordersprice'],
-                'storeorders_qty' => $data['storeordersqty'],
-                'storeorders_total' => $data['storeorderstotal'],
-                'storeorders_currency' => $data['storeorderscurrency'],
-                'storeorders_type' => $data['storeorderstype'],
-                'storeorders_status' => $data['storeorderstatus'],
-                'storeorders_date' => date("Y-m-d"),
-                'logsname' => $data['logsname'],
-                'logspnum' => $data['logspnum'],
-                'logsemail' => $data['logsemail'],
-                'logsgender' => $data['logsgender'],
-                'logslocation' => $data['logslocation'],
-                'logsdelivery' => $data['logdelivery'],
-                'logsemail' => $data['logsemail'],
-                'logsdate' => date("Y-m-d"),
+              //$storeordersrefid = rand(1000000000,9999999999);
 
-               ]
-            ];
+                $storeusersname = $data['storeusers_fname'] . ' ' . $data['storeusers_lname'];
+
+                //$refid = StoreOrder::where('storeordersrefid', $storeordersrefid)->count();
+                $storecarts = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.storeproductsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storeusersid)->get();
+                $total = 0;
+                foreach($storecarts as $storecart) { 
+                  $total = number_format($total + $storecart->storecarts_totalprice,2) ;
+                }
+   
+                foreach($storecarts as $storecart) { 
+                  $store = [
+                    [
+                    'storeusersid' => $data['storeusersid'],
+                    'productsid' => $storecart->storeproductsid,
+                    'storeorders_refid' => $data['storeorders_refid'],
+                    'storeorders_price' => $storecart->storeproductsprice,
+                    'storeorders_qty' => $storecart->storecarts_qty,
+                    'storeorders_total' => $storecart->storecarts_totalprice,
+                    'storeorders_totalall' => $total,
+                    'storeorders_currency' => '$',
+                    'storeorders_type' => $data['storeorders_type'],
+                    'storeorders_status' => $data['storeorders_status'],
+                    'storeorders_date' => date("Y-m-d H:i"),
+                    'logsname' => $storeusersname,
+                    'logspnum' => $data['storeusers_pnum'],
+                    'logsemail' => $data['storeusers_email'],
+                    'logsgender' => $data['storeusers_gender'],
+                    'logsstate' => $data['storeusers_state'],
+                    'logscountry' => $data['storeusers_country'],
+                    'logsaddress' => $data['storeusers_address'],
+                    'logsdelivery' => $data['storeusers_deliv'],
+                    'logsdate' => date("Y-m-d"),
+    
+                   ]
+                ];
+                   StoreOrder::insert($store);
+                }
+                StoreCart::where('storeusersid',$storeusersid)
+                ->delete();
+                return response()->json(['status' => true, 'message' => 'Order placed successfully'], 201); 
 
               /* $mailData = [
                 'title' => 'Mail from ' . $data['storeorders_name'],
@@ -105,8 +127,7 @@ class StoreOrderController extends Controller
 
               
                // if(Mail::to('adefolarin2017@gmail.com')->send(new StoreOrderMail($mailData))) {
-                  StoreOrder::insert($store);
-                  return response()->json(['status' => true], 201);
+                 
                 //}
 
               

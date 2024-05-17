@@ -30,7 +30,7 @@ class DepartmentController extends Controller
         if($deptsid == null) {
            
           if($departmentsnumrw > 0) {
-            $departments = DB::table('deptcategories')->limit(3)->join('departments','deptcategories.deptcategories_id','=', 'departments.deptcategoriesid')->select('departments.*','deptcategories.*')->get();
+            $departments = DB::table('deptcategories')->join('departments','deptcategories.deptcategories_id','=', 'departments.deptcategoriesid')->select('departments.*','deptcategories.*')->get();
             foreach($departments as $department) {
                 $data [] = array(
                 'departments_id' => $department->departments_id,
