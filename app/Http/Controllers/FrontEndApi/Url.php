@@ -12,7 +12,7 @@ class Url
      */
 
     public static function url() {
-        $genurl = "http://localhost/projects/kcccbackend/";
+        $genurl = "https://kccconline.org/kcccbackend/";
         return $genurl;
     }
 
