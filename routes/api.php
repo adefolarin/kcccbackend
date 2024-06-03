@@ -130,6 +130,7 @@ Route::get('/news/{id?}', [NewsController::class,'index']);
 Route::get('/sermon', [SermonController::class,'index']);
 
 Route::get('/sermonall', [SermonController::class,'getAllSermons']);
+Route::get('/sermonallone', [SermonController::class,'getAllSermonsOne']);
 
 Route::post('/sermonquicksearch', [SermonController::class,'sermonQuickSearch']);
 

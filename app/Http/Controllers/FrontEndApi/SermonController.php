@@ -117,6 +117,45 @@ class SermonController extends Controller
     }
 
 
+    public function getAllSermonsOne()
+    {
+
+        $now = date("Y-m-d H:i");
+
+        $sermonsnumrw = DB::table('sermoncategories')->join('sermons','sermoncategories.sermoncategories_id','=', 'sermons.sermoncategoriesid')->select('sermons.*','sermoncategories.sermoncategories_name')
+        ->orderBy('sermons_id','desc')
+        ->limit(1)
+        ->count();
+
+           
+          if($sermonsnumrw > 0) {
+            $sermons = DB::table('sermoncategories')->join('sermons','sermoncategories.sermoncategories_id','=', 'sermons.sermoncategoriesid')->select('sermons.*','sermoncategories.sermoncategories_name')
+            ->orderBy('sermons_id','desc')
+            ->limit(1)
+            ->get();
+            foreach($sermons as $sermon) {
+   
+                $data [] = array(
+                'sermons_id' => $sermon->sermons_id,
+                'sermons_title' => $sermon->sermons_title,
+                'sermons_file' => $sermon->sermons_file,
+                'sermons_date' => $sermon->sermons_date,
+                'sermons_preacher' => $sermon->sermons_preacher,
+                'sermons_location' => $sermon->sermons_location,
+                );
+            }
+          } else {
+            $data [] = array(
+                'sermons_id' => ''
+            );
+          }
+              
+            return response()->json(['sermons'=>$data]);            
+
+
+    }
+
+
     public function sermonQuickSearch(Request $request) {
       if($request->isMethod('post')) {
         $data = $request->all();
