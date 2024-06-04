@@ -175,6 +175,7 @@ Route::get('/podcast', [PodcastController::class,'podcastSearch']);
 Route::get('/podcastsearch', [PodcastControllerWeb::class,'podcastSearchWeb']);
 
 Route::get('/podcastweb', [PodcastControllerWeb::class,'index']);
+Route::get('/podcastallone', [PodcastControllerWeb::class,'getAllPodcastsOne']);
 
 // volforms
 Route::get('/volform', [VolFormController::class,'index']);

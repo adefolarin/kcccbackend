@@ -116,6 +116,44 @@ class PodcastControllerWeb extends Controller
 
     }
 
+    public function getAllPodcastsOne()
+    {
+
+        $now = date("Y-m-d H:i");
+
+        $podcastsnumrw = DB::table('podcastcategories')->join('podcasts','podcastcategories.podcastcategories_id','=', 'podcasts.podcastcategoriesid')->select('podcasts.*','podcastcategories.podcastcategories_name')
+        ->orderBy('podcasts_id','desc')
+        ->limit(1)
+        ->count();
+
+           
+          if($podcastsnumrw > 0) {
+            $podcasts = DB::table('podcastcategories')->join('podcasts','podcastcategories.podcastcategories_id','=', 'podcasts.podcastcategoriesid')->select('podcasts.*','podcastcategories.podcastcategories_name')
+            ->orderBy('podcasts_id','desc')
+            ->limit(1)
+            ->get();
+            foreach($podcasts as $podcast) {
+   
+                $data [] = array(
+                'podcasts_id' => $podcast->podcasts_id,
+                'podcasts_title' => $podcast->podcasts_title,
+                'podcasts_file' => $podcast->podcasts_file,
+                'podcasts_date' => $podcast->podcasts_date,
+                'podcasts_preacher' => $podcast->podcasts_preacher,
+                'podcasts_location' => $podcast->podcasts_location,
+                );
+            }
+          } else {
+            $data [] = array(
+                'podcasts_id' => ''
+            );
+          }
+              
+            return response()->json(['status' => true, 'podcasts'=>$data]);            
+
+
+    }
+
 
     public function podcastQuickSearch(Request $request) {
       if($request->isMethod('post')) {
