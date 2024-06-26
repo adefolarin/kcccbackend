@@ -10,6 +10,7 @@ use DB;
 //use App\Mail\StoreOrderMail;
 use App\Models\StoreOrder;
 use App\Models\StoreCart;
+use App\Models\ZipCode;
 
 class StoreOrderController extends Controller
 {
@@ -76,13 +77,17 @@ class StoreOrderController extends Controller
   
               //$storeordersrefid = rand(1000000000,9999999999);
 
+                $zipcode = ZipCode::query()->where('zipcodes_name', $data['zipcodes_name'])->first();
+
+                $zipcodes_price = $zipcode->zipcodes_price;
+
                 $storeusersname = $data['storeusers_fname'] . ' ' . $data['storeusers_lname'];
 
                 //$refid = StoreOrder::where('storeordersrefid', $storeordersrefid)->count();
                 $storecarts = DB::table('products')->orderByDesc('storecarts_id')->join('storecarts','products.products_id','=', 'storecarts.storeproductsid')->select('storecarts.*','products.products_name')->where('storeusersid',$storeusersid)->get();
                 $total = 0;
                 foreach($storecarts as $storecart) { 
-                  $total = number_format($total + $storecart->storecarts_totalprice,2) ;
+                  $total = number_format($total + $storecart->storecarts_totalprice,2);
                 }
    
                 foreach($storecarts as $storecart) { 
@@ -94,7 +99,8 @@ class StoreOrderController extends Controller
                     'storeorders_price' => $storecart->storeproductsprice,
                     'storeorders_qty' => $storecart->storecarts_qty,
                     'storeorders_total' => $storecart->storecarts_totalprice,
-                    'storeorders_totalall' => $total,
+                    'zipcodesprice' => $zipcodes_price,
+                    'storeorders_totalall' => $total + $zipcodes_price,
                     'storeorders_currency' => '$',
                     'storeorders_type' => $data['storeorders_type'],
                     'storeorders_status' => $data['storeorders_status'],

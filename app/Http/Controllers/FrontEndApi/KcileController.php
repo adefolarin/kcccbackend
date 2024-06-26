@@ -98,6 +98,72 @@ class KcileController extends Controller
           }
     }
 
+
+    public function webregmodulestore(Request $request)
+    {
+    
+        $message = "You have successfully registered for the above program";
+
+        if($request->isMethod('post')) {
+            $data = $request->all();
+            //echo "<prev>"; print_r($data); die;
+
+            //dd($data);
+
+            $bodylist = "";
+
+            foreach ($data['kciles_module'] as $value) {
+            
+                $kciles_coursename = $value;
+                $bodylist .= $kciles_coursename." | "; 
+              
+            }
+
+              $store = [
+                [
+                'kciles_name' => $data['kciles_name'],
+                'kciles_email' => $data['kciles_email'],
+                'kciles_gender' => $data['kciles_gender'],
+                'kciles_address' => $data['kciles_address'],
+                'kciles_country' => $data['kciles_country'],
+                'kciles_state' => $data['kciles_state'],
+                'kciles_city' => $data['kciles_city'],
+                'kciles_zipcode' => $data['kciles_zipcode'],
+                'kciles_pnum' => $data['kciles_pnum'],
+                'kciles_moduletype' => $data['kciles_moduletype'],
+                'kciles_coursename' => $bodylist,
+                'kciles_date' => date("Y-m-d"),
+
+               ]
+            ];
+
+               $mailData = [
+                'title' => 'Mail from ' . $data['kciles_name'],
+                'kciles_name' => $data['kciles_name'],
+                'kciles_email' => $data['kciles_email'],
+                'kciles_gender' => $data['kciles_gender'],
+                'kciles_address' => $data['kciles_address'],
+                'kciles_country' => $data['kciles_country'],
+                'kciles_state' => $data['kciles_state'],
+                'kciles_city' => $data['kciles_city'],
+                'kciles_zipcode' => $data['kciles_zipcode'],
+                'kciles_pnum' => $data['kciles_pnum'],
+                'kciles_moduletype' => $data['kciles_moduletype'],
+                'kciles_coursename' => $bodylist,
+                'kciles_date' => date("Y-m-d"),
+               ];
+
+              
+                if(Mail::to('kcile@kccconline.org')->send(new KcileMail($mailData))) {
+                  //Kcile::insert($store);
+                  return response()->json(['status' => true, 'message' => $message], 201);
+                }
+                //return redirect('admin/event')->with('success_message', $message);
+              
+
+          }
+    }
+
     public function mobileregmodulestore(Request $request)
     {
     
@@ -153,7 +219,7 @@ class KcileController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new KcileMail($mailData))) {
+                if(Mail::to('kcile@kccconline.org')->send(new KcileMail($mailData))) {
                   //Kcile::insert($store);
                   return response()->json(['status' => true, 'message' => $message], 201);
                 }
@@ -219,7 +285,7 @@ class KcileController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new KcileMail($mailData))) {
+                if(Mail::to('kcile@kccconline.org')->send(new KcileMail($mailData))) {
                   //Kcile::insert($store);
                   return response()->json(['status' => true, 'message' => $message], 201);
                 }

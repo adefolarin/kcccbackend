@@ -84,5 +84,39 @@ class NewsController extends Controller
 
 
 
+    public function getSomeNews()
+    {
+
+        $now = date("Y-m-d H:i");
+
+        $newsnumrw = DB::table('newscategories')->join('news','newscategories.newscategories_id','=', 'news.newscategoriesid')->select('news.*','newscategories.newscategories_name')
+        ->limit(4)
+        ->count();
+           
+          if($newsnumrw > 0) {
+            $news = DB::table('newscategories')->join('news','newscategories.newscategories_id','=', 'news.newscategoriesid')->select('news.*','newscategories.newscategories_name')
+            ->limit(4)
+            ->get();
+            foreach($news as $news) {
+   
+                $data [] = array(
+                'news_id' => $news->news_id,
+                'news_title' => $news->news_title,
+                'news_file' => Url::news() . $news->news_file,
+                'news_content' => $news->news_content,
+                'news_date' => $news->news_date,
+                );
+            }
+          } else {
+            $data [] = array(
+                'news_title' => ''
+            );
+          }
+              
+            return response()->json(['status' => true, 'news'=>$data]);
+
+        }             
+
+
 
 }

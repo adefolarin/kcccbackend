@@ -92,7 +92,7 @@ class DeptMembRegController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new DeptRegMail($mailData))) {
+                if(Mail::to('info@kccconline.org')->send(new DeptRegMail($mailData))) {
                     $deptmembreg->insert($store);
                 }
                 return response()->json(['status' => true, 'message' => $message], 201);

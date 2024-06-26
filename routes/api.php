@@ -124,6 +124,8 @@ Route::get('/resource', [ResourceController::class,'index']);
 
 // News
 Route::get('/news/{id?}', [NewsController::class,'index']);
+Route::get('/newssome', [NewsController::class,'getSomeNews']);
+
 
 
 // Sermons
@@ -157,8 +159,10 @@ Route::post('/volunteer', [VolunteerController::class,'store']);
 // Mobile Volunteers
 Route::post('/mobilevolunteer', [VolunteerController::class,'mobilestore']);
 
-// KCILE REG MODULW
+// KCILE REG MODULE
 Route::post('/mobileregmodule', [KcileController::class,'mobileregmodulestore']);
+
+Route::post('/webregmodule', [KcileController::class,'webregmodulestore']);
 
 // KCILE
 Route::post('/mobilekcile', [KcileController::class,'mobilestore']);
@@ -238,6 +242,7 @@ Route::get('/storeuser/{id?}', [StoreUserController::class,'index']);
 
     // Zip Code
     Route::get('/zipcode', [ZipCodeController::class,'index']);
+    Route::post('/zipcodeone', [ZipCodeController::class,'getOneZipCode']);
 
     // Store Carts
     Route::get('/storecart/{id?}', [StoreCartController::class,'index']);

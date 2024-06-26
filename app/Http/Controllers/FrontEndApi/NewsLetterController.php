@@ -91,7 +91,7 @@ class NewsLetterController extends Controller
                ];
 
               
-                Mail::to('adefolarin2017@gmail.com')->send(new NewsLetterMail($mailData));
+                Mail::to('info@kccconline.org')->send(new NewsLetterMail($mailData));
                 return response()->json(['status' => true, 'message' => $message], 201);
                 //return redirect('admin/event')->with('success_message', $message);
               

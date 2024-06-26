@@ -141,7 +141,7 @@ class VolunteerController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new VolunteerMail($mailData))) {
+                if(Mail::to('volunteer@kccconline.org')->send(new VolunteerMail($mailData))) {
                   Volunteer::insert($store);
                   return response()->json(['status' => true, 'message' => $message], 201);
                 }

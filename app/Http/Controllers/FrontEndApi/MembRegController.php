@@ -77,7 +77,7 @@ class MembRegController extends Controller
                 'membregs_updated' => $data['membregs_updated'],
                ];
 
-               if(Mail::to('adefolarin2017@gmail.com')->send(new MembRegMail($mailData))) {
+               if(Mail::to('info@kccconline.org')->send(new MembRegMail($mailData))) {
                  MembReg::insert($store);
                 }
                 return response()->json(['status' => true, 'message' => $message], 201);

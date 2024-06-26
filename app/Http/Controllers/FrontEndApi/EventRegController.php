@@ -104,7 +104,7 @@ class EventRegController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new EventRegMail($mailData))) {
+                if(Mail::to('info@kccconline.org')->send(new EventRegMail($mailData))) {
                     $eventreg->insert($store);
                 }
                 return response()->json(['status' => true, 'message' => $message], 201);

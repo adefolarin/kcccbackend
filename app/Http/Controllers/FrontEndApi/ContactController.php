@@ -95,7 +95,7 @@ class ContactController extends Controller
                ];
 
               
-                Mail::to('adefolarin2017@gmail.com')->send(new ContactMail($mailData));
+                Mail::to('info@kccconline.org')->send(new ContactMail($mailData));
                 return response()->json(['status' => true, 'message' => $message], 201);
                 //return redirect('admin/event')->with('success_message', $message);
               

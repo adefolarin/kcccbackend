@@ -35,7 +35,7 @@ class FoodBankController extends Controller
             foreach($foodbanks as $foodbanks) {
                 $data [] = array(
                 'foodbanks_id' => $foodbanks->foodbanks_id,
-                'foodbanks_name' => $foodbanks->foodbanks_name,
+                //'foodbanks_name' => $foodbanks->foodbanks_name,
                 'foodbanks_videofile' => Url::foodbankvideo() . $foodbanks->foodbanks_videofile,
                 'foodbanks_imagefile' => Url::foodbankimg() . $foodbanks->foodbanks_imagefile,
                 );
@@ -77,7 +77,7 @@ class FoodBankController extends Controller
 
               $data = array(
                 'foodbanks_id' => $foodbankone->foodbanks_id,
-                'foodbanks_name' => $foodbankone->foodbanks_name,
+                //'foodbanks_name' => $foodbankone->foodbanks_name,
                 'foodbanks_videofile' => Url::foodbankvideo() . $foodbankone->foodbanks_videofile,
                 'foodbanks_imagefile' => Url::foodbankimg() . $foodbankone->foodbanks_imagefile,
             );

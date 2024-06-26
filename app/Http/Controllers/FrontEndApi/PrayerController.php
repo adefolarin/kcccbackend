@@ -94,7 +94,7 @@ class PrayerController extends Controller
                ];
 
               
-                if(Mail::to('adefolarin2017@gmail.com')->send(new PrayerMail($mailData))) {
+                if(Mail::to('prayerrequest@kccconline.org')->send(new PrayerMail($mailData))) {
                   Prayer::insert($store);
                   return response()->json(['status' => true, 'message' => $message], 201);
                 }

@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->decimal('storeorders_price',10,2);
                 $table->bigInteger('storeorders_qty');
                 $table->decimal('storeorders_total',10,2);
+                $table->decimal('zipcodesprice',10,2);
                 $table->decimal('storeorders_totalall',10,2);
                 $table->string('storeorders_currency');
                 $table->string('storeorders_type');

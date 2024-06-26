@@ -12,7 +12,8 @@ class Url
      */
 
     public static function url() {
-        $genurl = "https://kccconline.org/kcccbackend/";
+        //$genurl = "https://adeajalaministries.org/kcccbackend/";
+        $genurl = "http://localhost/projects/kcccbackend/";
         return $genurl;
     }
 
